@@ -3,24 +3,32 @@ import PropTypes from 'prop-types';
 
 
 class Contact extends Component {
-    state = {};
+    state = {
+        showContactInfo: false
+    };
 
-    onShowClick = ( e) => {
-
-    }
+    onShowClick = e => {
+        this.setState({showContactInfo:!this.state.showContactInfo});
+    };
 
     render() {
-        const {name, email, phone}= this.props.contact;
+         const {name, email, phone}= this.props.contact;
+        const {showContactInfo} = this.state;
+
         return (
             <div className="card card-body mb-2 ">
-                <h4> {name} {' '}
+                <h4> {name}{' '}
                 <i 
-                onClick={this.onShowClick}
+                onClick={() => this.setState({showContactInfo:!this.state.showContactInfo})
+                  }
                  className="fas fa-sort-down"></i> </h4>
-                <ul className="list-group">
-                    <li className= "list-group-item">E-mail : {email}</li>
-                    <li className="list-group-item">Phone : {phone} </li>
-                </ul>
+                 {showContactInfo ? (
+                     <ul className="list-group">
+                     <li className= "list-group-item">E-mail : {email}</li>
+                     <li className="list-group-item">Phone : {phone} </li>
+                 </ul>
+                 ) : null}
+                
                 
             </div>
         );
